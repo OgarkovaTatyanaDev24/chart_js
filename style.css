@@ -1,0 +1,66 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#container {
+  width: 656px;
+  height: 400px;
+  margin: 0 auto;
+  background: #f9ecff;
+}
+.input {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin: 0 auto;
+  margin-top: 110px;
+}
+.btn {
+  font-size: 16px;
+  color: rgb(255, 241, 241);
+  padding: 5px;
+  background: rgb(105, 86, 105);
+  border-radius: 3px;
+}
+.inp {
+  width: 500px;
+  height: 30px;
+  border-radius: 3px;
+  background: rgb(250, 229, 236);
+}
+.rect {
+  fill: #fde4e4;
+}
+.text {
+  text-anchor: middle;
+}
+.graphLabel {
+  fill: #a07f7f;
+  width: 50px;
+  height: 20px;
+}
+
+.labelText {
+  text-anchor: middle;
+  alignment-baseline: central;
+}
+.chartSvg {
+  width: 100%;
+  height: 100%;
+}
+.colorBackground {
+  fill: #fde4e4;
+}
+.line {
+  fill: none;
+  stroke: #3c1717;
+  stroke-width: 2px;
+}
+.lineHover {
+  fill: #3c1717;
+  width: 2px;
+}
+.circle {
+  fill: #3c1717;
+}
