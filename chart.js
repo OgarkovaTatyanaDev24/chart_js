@@ -24,6 +24,7 @@ class DataController extends EventTarget {
 }
 class ChartController {
   drawHorisontal(element, index) {
+    console.log(element);
     const position = this.chartCoord[index];
     return `<g>
         <text
@@ -39,7 +40,7 @@ class ChartController {
           y=${this.spaceTop}
           width=${this.stepX}
           height=${this.chartHeight}
-          onMouseOver="chartController.setHover(${element.value}, 
+          onMouseOver="chartController.setHover(${element.value},
             ${position[0]}, 
             ${position[1]})"}
         />
@@ -59,37 +60,20 @@ class ChartController {
   }
   hideHover() {
     const hover = document.getElementById("hover");
-    hover.innerHTML = "";
+    hover.setAttribute("visibility", "hidden");
+    const hover_line = document.getElementById("lineHover");
+    hover_line.setAttribute("visibility", "hidden");
   }
 
   setHover(value, posx, posy) {
     const hover = document.getElementById("hover");
-    const inner = `
-        <circle
-          cx=${posx}
-          cy=${posy}
-          r="5"
-          className="circle"
-        />
-        <rect
-          x=${posx}
-          y=${this.spaceTop}
-          height=${this.chartHeight}
-          class="lineHover"
-        />
-        <rect
-          x=${posx + 5}
-          y=${posy - 10}
-          class="graphLabel" />
-        <text
-          x=${posx + 30}
-          y=${posy}
-          class="labelText"
-        >
-          ${value}
-        </text>
-        `;
-    hover.innerHTML = inner;
+    hover.setAttribute("transform", `translate(${posx}, ${posy})`);
+    hover.setAttribute("visibility", "visible");
+    const hover_line = document.getElementById("lineHover");
+    hover_line.setAttribute("x", posx);
+    hover_line.setAttribute("visibility", "visible");
+    const hover_label = document.getElementById("hoverLabel");
+    hover_label.textContent = value;
   }
 
   countData(data) {
@@ -160,7 +144,32 @@ class ChartController {
                 <g> ${horizontal} </g>
                 <g> ${vertical} </g>
                 <polyline class="line" points="${this.lineCoords}" />
-                <g id="hover"></g>
+                <rect
+                    y=${this.spaceTop}
+                    height=${this.chartHeight}
+                    class="lineHover"
+                    id="lineHover"
+                    visibility="hidden"
+                  />
+                <g id="hover" visibility="hidden">
+                  <circle
+                    cx=0
+                    cy=0
+                    r="5"
+                    className="circle"
+                  />
+                  <rect
+                    x=5
+                    y=10
+                    class="graphLabel" />
+                  <text
+                    x=30
+                    y=20
+                    class="labelText"
+                    id="hoverLabel"
+                  >
+                  </text>
+                </g>
             </svg>
         `;
     const box = document.getElementById("container");
